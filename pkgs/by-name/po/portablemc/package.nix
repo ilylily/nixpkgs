@@ -24,6 +24,12 @@
 let
   # Copied from the `prismlauncher` package
   runtimeLibs = [
+    # lwjgl
+    libGL
+    glfw
+    openal
+    (lib.getLib stdenv.cc.cc)
+  ] ++ lib.optional stdenv.hostPlatform.isLinux [
     libX11
     libXext
     libXcursor
@@ -32,10 +38,6 @@ let
 
     # lwjgl
     libpulseaudio
-    libGL
-    glfw
-    openal
-    (lib.getLib stdenv.cc.cc)
 
     # oshi
     udev
